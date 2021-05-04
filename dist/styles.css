@@ -5,6 +5,7 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: whitesmoke;
 }
 
 h1 {
@@ -12,8 +13,121 @@ h1 {
 }
 
 .container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 100px 500px;
   justify-content: space-around;
-  width: 80%;
+  width: 50%;
+  margin: 50px auto;
+  border: solid 1px rgba(189, 187, 187, 0.83);
+  border-radius: 20px;
+  background-color: 	#b57edc;
+}
+
+#title {
+  grid-column: 1/3;
+  grid-row: 1/2;
+  justify-content: center;
+}
+
+
+.project-title {
+  border: solid 1px rgba(189, 187, 187, 0.83);
+  padding: 10px;
   margin: 0 auto;
+  border-radius: 20px;
+  width: 80%;
+  text-decoration: none;
+  margin-bottom: 5px;
+  list-style-type: circle;
+  list-style-position: inside;
+  background-color: #ffecff;
+}
+
+.project {
+  grid-column: 1fr;
+  grid-row: 2/3;
+  padding-left: 10px;
+  border-right: solid 1px rgba(189, 187, 187, 0.83);
+}
+
+.to-dos {
+  grid-row: 2/4;
+  grid-column: 2fr;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.add-project {
+    width: 100%;
+}
+
+.add-project-input{
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+#add-project-btn{
+  width: 90%;
+  margin: 0 auto;
+}
+
+.to-dos-title {
+  width: 100%;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#add-todo-btn{
+  width: 25%;
+  margin: 10px auto;
+  border: 0px;
+  border-radius: 10px;
+  color: white;
+  background-color:rgba(17, 109, 201, 0.83);
+  margin-right: 10px;
+}
+.edit-btns{
+  display: flex;
+  margin-top: 50px;
+}
+
+#edit-btn {
+  width: 20%;
+  margin: 10px auto;
+  border: 0px;
+  border-radius: 10px;
+  color: white;
+  background-color:rgba(17, 109, 201, 0.83);
+  margin-right: 10px;
+}
+
+#delete-btn {
+  width: 20%;
+  margin: 10px auto;
+  border: 0px;
+  border-radius: 10px;
+  color: white;
+  background-color:rgba(208, 51, 11, 0.83);
+}
+
+
+/* .to-dos-form {
+  display: flex;
+} */
+
+#add-to-btn {
+  width: 30%;
+  padding: 5px;
+  margin: 10px auto;
+  border: 0px;
+  border-radius: 10px;
+  color: white;
+  background-color:rgba(17, 109, 201, 0.83);
+}
+
+#add-to-input {
+  /* width: 90%;
+  height: 20px; */
 }
