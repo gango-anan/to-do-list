@@ -8,37 +8,37 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>TO DO LIST</h1>
   <div class="container">
+    <h1 id="title">TO DO LIST</h1>
     <div class="project">
       <h2>Projects</h2>
       <ul>
-        <li>Personal</li>
-        <li>Work</li>
-        <li>Coding</li>
+        <li class="project-title">Personal</li>
+        <li class="project-title">Work</li>
+        <li class="project-title">Coding</li>
       </ul>
-      <form action="">
-        <input type="text">
+      <form action="" class="add-project">
+        <input type="text" class="add-project-input">
         <div>
-          <button type="submit">+Add Project</button>
+          <button type="submit" id="add-project-btn" class="edit-btn" >+Add Project</button>
         </div>
       </form>
     </div>
     <div class="to-dos">
       <h2>Personal</h2>
       <ul>
-        <li>Shopping</li>
-        <li>Gym</li>
-        <li>Saloon</li>
+        <li class="to-dos-title">Shopping</li>
+        <li class="to-dos-title">Gym</li>
+        <li class="to-dos-title">Saloon</li>
       </ul>
-      <form action="">
-        <input type="text">
-        <div>
-          <button type="submit">+Add ToDo</button>
-        </div>
+      <form action="" class="to-dos-form">
+        <input type="text" id="add-to-input">
+        <button type="submit" id="add-todo-btn" >+Add ToDo</button>
       </form>
-      <button type="button">Edit ToDo</button>
-      <button type="button">Delete ToDo</button>
+      <div class="edit-btns">
+        <button type="button" id="edit-btn">Edit ToDo</button>
+        <button type="button" id="delete-btn">Delete ToDo</button>
+      </div>
     </div>
   </div>
   <script src="main.js"></script>
