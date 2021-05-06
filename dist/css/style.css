@@ -62,6 +62,7 @@ body {
 
 .projects__item {
   cursor: pointer;
+  font-size: 1.2rem;
 }
 
 .projects__item--active {
