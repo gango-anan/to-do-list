@@ -1,0 +1,296 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;700&display=swap");
+:root {
+  --primary-color: #af7eeb;
+  --secondary-color: #e3e9ff;
+  --light-color: #fff;
+  --tertiary-color: #a19c9c;
+  --danger-color: #ff4955;
+  --general-spacer: 3rem;
+  --minimum-height: 50vh;
+  --spacer: 2rem;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: var(--general-spacer);
+  grid: "header header header header" auto ". projects tasks ." auto/1fr minmax(256px, 420px) minmax(320px, 768px) 1fr;
+  background-color: var(--secondary-color);
+}
+
+.app-title {
+  grid-area: header;
+  text-align: center;
+  color: var(--light-color);
+  font-weight: bolder;
+  font-size: 3rem;
+}
+
+.projects {
+  grid-area: projects;
+  min-height: var(--minimum-height);
+  background-color: var(--light-color);
+  border-radius: 32px;
+  -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.projects__title {
+  background-color: var(--primary-color);
+  padding: var(--spacer);
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  color: var(--light-color);
+}
+
+.projects__body {
+  padding: 0 var(--spacer);
+  color: #8f8686;
+}
+
+.projects__list {
+  padding-left: 1rem;
+  line-height: var(--general-spacer);
+  list-style-type: circle;
+}
+
+.projects__item {
+  cursor: pointer;
+}
+
+.projects__item--active {
+  font-weight: 700;
+}
+
+.projects__form {
+  margin-top: var(--spacer);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.projects__form__button {
+  display: block;
+  margin: 1rem auto;
+  padding: 10px 16px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border: 0px;
+  font-size: 1.2rem;
+  color: var(--light-color);
+  background-color: var(--primary-color);
+  border-radius: 10px;
+}
+
+.projects__form__input {
+  margin-bottom: var(--spacer);
+  border: 0;
+  font-size: 1.2rem;
+  opacity: 0.5;
+  border-bottom: 2px solid var(--tertiary-color);
+  text-align: center;
+  padding: 0.5rem 0;
+  outline: 0px;
+}
+
+.projects__form__input:focus {
+  border-bottom-width: 4px;
+}
+
+.projects__form__input:focus::-webkit-input-placeholder {
+  opacity: 0.2;
+}
+
+.projects__form__input:focus:-ms-input-placeholder {
+  opacity: 0.2;
+}
+
+.projects__form__input:focus::-ms-input-placeholder {
+  opacity: 0.2;
+}
+
+.projects__form__input:focus::placeholder {
+  opacity: 0.2;
+}
+
+.todos {
+  grid-area: tasks;
+}
+
+.todos__header {
+  color: var(--light-color);
+  background-color: var(--primary-color);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: var(--spacer);
+}
+
+.todos__count {
+  margin-left: 1rem;
+}
+
+.todos__body {
+  margin-top: var(--spacer);
+  background-color: var(--light-color);
+  padding: var(--general-spacer) var(--spacer);
+  min-height: var(--minimum-height);
+  -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  line-height: var(--general-spacer);
+}
+
+.todos__tasks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.todos__item {
+  cursor: pointer;
+  margin-right: 1rem;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: -webkit-transform 300ms ease-in-out;
+  transition: -webkit-transform 300ms ease-in-out;
+  transition: transform 300ms ease-in-out;
+  transition: transform 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
+}
+
+.todos__item:hover {
+  -webkit-transform: scale(1.5);
+          transform: scale(1.5);
+}
+
+.todos__label {
+  cursor: pointer;
+  padding: 0 0.2rem;
+  position: relative;
+}
+
+.todos__label::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 10px;
+  height: 3px;
+  background: var(--tertiary-color);
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transform-origin: right;
+          transform-origin: right;
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  transition: -webkit-transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out, -webkit-transform 150ms ease-in-out;
+}
+
+.todos__item:checked + .todos__label::after {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+  -webkit-transform-origin: left;
+          transform-origin: left;
+}
+
+.todos__item:checked + .todos__label {
+  opacity: 0.3;
+}
+
+.todos__delete {
+  cursor: pointer;
+}
+
+.todos__creator {
+  position: absolute;
+  left: 35%;
+  bottom: -25px;
+}
+
+.todos__form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.todos__input {
+  margin-bottom: var(--spacer);
+  border: 0;
+  font-size: 1.2rem;
+  opacity: 0.5;
+  border-bottom: 2px solid var(--secondary-color);
+  text-align: center;
+  padding: 0.5rem 0;
+  outline: 0px;
+}
+
+.todos__input:focus {
+  border-bottom-width: 4px;
+}
+
+.todos__input:focus::-webkit-input-placeholder {
+  opacity: 0.2;
+}
+
+.todos__input:focus:-ms-input-placeholder {
+  opacity: 0.2;
+}
+
+.todos__input:focus::-ms-input-placeholder {
+  opacity: 0.2;
+}
+
+.todos__input:focus::placeholder {
+  opacity: 0.2;
+}
+
+.todos__button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--light-color);
+  background-color: var(--primary-color);
+  border: 0;
+  border-radius: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+/*# sourceMappingURL=style.css.map */
