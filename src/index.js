@@ -2,7 +2,8 @@ const projectsContainer = document.querySelector('.projects__list');
 const formProject = document.querySelector('.projects__form');
 const projectInput = document.querySelector('.projects__form__input')
 
-let projects = [{name:"General",tasks: []}];
+const projectsKey = 'myProjects';
+let projects = JSON.parse(localStorage.getItem('myProjects')) || [{name:"General",tasks: []}];
 
 // Utility Functions
 function renderProjects() {
@@ -26,27 +27,17 @@ function Project (name, tasks =[]) {
     this.tasks = tasks
 }
 
-
-
-function createProject (){
-  
-}
-
 // Event Listeners
-
 formProject.addEventListener('submit',(e) => {
   e.preventDefault();
   const newProjectvalue = projectInput.value;
   const newProject = new Project(newProjectvalue);
   projects.push(newProject);
+  localStorage.setItem('myProjects', JSON.stringify(projects));
   projectInput.value = null;
   removeElements(projectsContainer);
   renderProjects();
 })
-
-
-
-
 
 renderProjects();
 
