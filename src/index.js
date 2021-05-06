@@ -27,6 +27,12 @@ function Project (name, tasks =[]) {
     this.tasks = tasks
 }
 
+function removeActiveClass(parentElement) {
+  parentElement.childNodes.forEach(element => {
+    element.classList.remove('projects__item--active');
+  })
+}
+
 // Event Listeners
 formProject.addEventListener('submit',(e) => {
   e.preventDefault();
@@ -39,5 +45,13 @@ formProject.addEventListener('submit',(e) => {
   renderProjects();
 })
 
+projectsContainer.addEventListener('click', (e) => {
+  if(e.target.tagName === 'LI'){
+    removeActiveClass(projectsContainer);
+    e.target.classList.add('projects__item--active');
+  }
+})
+
+console.log(projectsContainer.childNodes)
 renderProjects();
 
