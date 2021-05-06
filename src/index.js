@@ -39,6 +39,7 @@ function removeActiveClass(parentElement) {
 formProject.addEventListener('submit',(e) => {
   e.preventDefault();
   const newProjectvalue = projectInput.value;
+  if (newProjectvalue === null || newProjectvalue === '') return;
   const newProject = new Project(newProjectvalue);
   projects.push(newProject);
   localStorage.setItem('myProjects', JSON.stringify(projects));
@@ -68,4 +69,3 @@ function renderTasks(element) {
 }
 
 renderProjects();
-
