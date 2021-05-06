@@ -1,6 +1,8 @@
 const projectsContainer = document.querySelector('.projects__list');
 const formProject = document.querySelector('.projects__form');
 const projectInput = document.querySelector('.projects__form__input')
+const tasksContainer = document.querySelector('.todos')
+const projectTitleContainer = document.querySelector('.todos__header')
 
 const projectsKey = 'myProjects';
 let projects = JSON.parse(localStorage.getItem('myProjects')) || [{name:"General",tasks: []}];
@@ -49,9 +51,21 @@ projectsContainer.addEventListener('click', (e) => {
   if(e.target.tagName === 'LI'){
     removeActiveClass(projectsContainer);
     e.target.classList.add('projects__item--active');
+    tasksContainer.classList.remove('hide')
+    removeElements(projectTitleContainer)
+    renderTasks(e.target);
   }
 })
 
-console.log(projectsContainer.childNodes)
+function renderTasks(element) {
+  const tasksTitle = document.createElement('h2');
+  const tasksCount = document.createElement('p');
+  tasksTitle.innerText = element.innerText;
+  tasksTitle.classList.add("todos__title");
+  tasksCount.innerText = "3 tasks pending";
+  tasksCount.classList.add("todos__count")
+  projectTitleContainer.append(tasksTitle,tasksCount)
+}
+
 renderProjects();
 
