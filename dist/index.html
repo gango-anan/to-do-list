@@ -4,43 +4,79 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ToDo List</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>To Do List</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="https://kit.fontawesome.com/81f483528b.js" crossorigin="anonymous"></script>
+  <!-- <script defer src="script.js"></script> -->
 </head>
 <body>
-  <div class="container">
-    <h1 id="title">TO DO LIST</h1>
-    <div class="project">
+  <h1 class="app-title">TO DO LIST APP</h1>
+  <div class="projects">
+    <div class="projects__title">
       <h2>Projects</h2>
-      <ul>
-        <li class="project-title">Personal</li>
-        <li class="project-title">Work</li>
-        <li class="project-title">Coding</li>
+    </div>
+    <div class="projects__body">
+      <ul class="projects__list">
+        <li class="projects__item projects__item--active">Programming</li>
+        <li class="projects__item">Cloud Computing</li>
+        <li class="projects__item">Scripting</li>
+        <li class="projects__item">Systems Administration</li>
+        <li class="projects__item">Computer Applications</li>
       </ul>
-      <form action="" class="add-project">
-        <input type="text" class="add-project-input">
-        <div>
-          <button type="submit" id="add-project-btn" class="edit-btn" >+Add Project</button>
-        </div>
+
+      <form action="" class="projects__form">
+        <input type="text" class="projects__form__input"
+        placeholder="new project"
+        aria-label="new project"/>
+        <button class="projects__form__button">+ New Project</button>
       </form>
     </div>
-    <div class="to-dos">
-      <h2>Personal</h2>
-      <ul>
-        <li class="to-dos-title">Shopping</li>
-        <li class="to-dos-title">Gym</li>
-        <li class="to-dos-title">Saloon</li>
-      </ul>
-      <form action="" class="to-dos-form">
-        <input type="text" id="add-to-input">
-        <button type="submit" id="add-todo-btn" >+Add ToDo</button>
-      </form>
-      <div class="edit-btns">
-        <button type="button" id="edit-btn">Edit ToDo</button>
-        <button type="button" id="delete-btn">Delete ToDo</button>
+  </div>
+
+  <div class="todos">
+    <div class="todos__header">
+      <h2 class="todos__title">Programming</h2>
+      <p class="todos__count">3 tasks pending</p>
+    </div>
+
+    <div class="todos__body">
+      <div class="todos__tasks">
+        <div class="todos__task">
+          <input type="checkbox" id="task-1" class="todos__item"/>
+          <label for="task-1" class="todos__label">
+            Object Oriented Programming.
+          </label>
+        </div>
+      </div> <!--Task1-->
+
+      <div class="todos__tasks">
+        <div class="todos__task">
+          <input type="checkbox" id="task-2" class="todos__item"/>
+          <label for="task-2" class="todos__label">
+            Functional Programming.
+          </label>
+        </div>
+      </div> <!--Task2-->
+
+      <div class="todos__tasks">
+        <div class="todos__task">
+          <input type="checkbox" id="task-3" class="todos__item"/>
+          <label for="task-3" class="todos__label">
+            Procedural Programming.
+          </label>
+        </div>
+        <div class="todos__delete"><i class="far fa-trash-alt"></i></div>
+      </div> <!--Task3-->
+
+      <div class="todos__creator">
+        <form action="" class="todos__form">
+          <input type="text" class="todos__input" placeholder="new task" aria-label="new task"/>
+          <button class="todos__button">
+            + New task
+          </button>
+        </form>
       </div>
     </div>
   </div>
-  <script src="main.js"></script>
 </body>
 </html>
