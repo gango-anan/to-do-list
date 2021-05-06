@@ -15,6 +15,12 @@ function renderProjects() {
   })
 }
 
+function removeElements(parentElement) {
+  while(parentElement.lastChild){
+    parentElement.removeChild(parentElement.lastChild);
+  }
+}
+
 function Project (name, tasks =[]) {
     this.name = name
     this.tasks = tasks
@@ -29,11 +35,13 @@ function createProject (){
 // Event Listeners
 
 formProject.addEventListener('submit',(e) => {
-  e.preventDefault()
+  e.preventDefault();
   const newProjectvalue = projectInput.value;
-  const newProject = new Project(newProjectvalue)
-  projects.push(newProject)
-  renderProjects()
+  const newProject = new Project(newProjectvalue);
+  projects.push(newProject);
+  projectInput.value = null;
+  removeElements(projectsContainer);
+  renderProjects();
 })
 
 
