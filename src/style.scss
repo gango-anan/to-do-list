@@ -5,7 +5,7 @@
   --secondary-color: #e3e9ff;
   --light-color: #fff;
   --tertiary-color: #a19c9c;
-  --danger-color: #ff4955;
+  --danger-color: #f56f78;
   --general-spacer: 3rem;
   --minimum-height: 50vh;
   --spacer: 2rem;
@@ -52,6 +52,7 @@ body {
   &__body {
     padding: 0 var(--spacer);
     color: rgb(143, 134, 134);
+    margin-bottom: var(--spacer);
   }
 
   &__list {
@@ -76,18 +77,6 @@ body {
     justify-content: center;
   }
 
-  &__form__button {
-    display: block;
-    margin: 1rem auto;
-    padding: 10px 16px;
-    width: fit-content;
-    border: 0px;
-    font-size: 1.2rem;
-    color: var(--light-color);
-    background-color: var(--primary-color);
-    border-radius: 10px;
-  }
-
   &__form__input {
     margin-bottom: var(--spacer);
     border: 0;
@@ -106,6 +95,29 @@ body {
       opacity: 0.2;
     }
   }
+
+  &__form__button {
+    display: block;
+    margin: auto;
+    padding: 0.8rem 1.5rem;
+    width: fit-content;
+    border: 0px;
+    font-size: 1.5rem;
+    color: var(--light-color);
+    background-color: var(--primary-color);
+    border-radius: 5px;
+  }
+
+  &__delete_button {
+    display: block;
+    color: var(--light-color);
+    font-size: 1.2rem;
+    margin: 1rem auto;
+    background-color: var(--danger-color);
+    border: 0px;
+    padding: 0.5rem;
+    border-radius: 5px;
+  }
 }
 
 .todos {
@@ -117,6 +129,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: var(--spacer);
+    border-top-right-radius: 32px;
   }
 
   &__count {
@@ -131,6 +144,7 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     position: relative;
     line-height: var(--general-spacer);
+    border-bottom-left-radius: 32px;
   }
 
   &__tasks {
@@ -226,7 +240,6 @@ body {
     text-align: center;
     cursor: pointer;
   }
-
 }
 
 .hide {
