@@ -1,8 +1,9 @@
 const projectsContainer = document.querySelector('.projects__list');
-const formProject = document.querySelector('.projects__form');
+const projectForm = document.querySelector('.projects__form');
 const projectInput = document.querySelector('.projects__form__input')
 const tasksContainer = document.querySelector('.todos')
-const projectTitleContainer = document.querySelector('.todos__header')
+const projectTitle = document.querySelector('.todos__title')
+const pendingTasksCount = document.querySelector('.todos__count');
 
 const projectsKey = 'myProjects';
 const selectedProjectIdKey = 'mySelectedProjectId';
@@ -30,10 +31,9 @@ function removeElements(parentElement) {
   }
 }
 
-function removeActiveClass(parentElement) {
-  parentElement.childNodes.forEach(element => {
-    element.classList.remove('projects__item--active');
-  })
+function save() {
+  localStorage.setItem(projectsKey, JSON.stringify(projects));
+  localStorage.setItem(selectedProjectIdKey, selectedProjectId);
 }
 
 // Event Listeners
@@ -43,7 +43,7 @@ formProject.addEventListener('submit',(e) => {
   if (newProjectvalue === null || newProjectvalue === '') return;
   const newProject = Project(newProjectvalue);
   projects.push(newProject);
-  localStorage.setItem('myProjects', JSON.stringify(projects));
+  save();
   projectInput.value = null;
   removeElements(projectsContainer);
   renderProjects();
