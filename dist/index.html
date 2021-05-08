@@ -37,20 +37,17 @@
       <div class="todos__creator">
         <form action="" class="todos__form">
           <input type="text" class="todos__input" placeholder="new task" aria-label="new task"/>
-          <button class="todos__button">
-            + New task
-          </button>
+          <button class="todos__button">+ New task</button>
         </form>
       </div>
     </div>
   </div>
+
   <template id="task-template">
-    <div class="todos__tasks">
-      <div class="todos__task">
-        <input type="checkbox" class="todos__item"/>
+    <div class="todos__tasks"><div class="todos__task"><input type="checkbox" class="todos__item"/>
         <label class="todos__label"></label>
       </div>
-      <div class="todos__delete"><i class="far fa-trash-alt"></i></div>
+      <i class="todos__delete far fa-trash-alt" id="del" data-id="deleteSelectedTask"></i>
     </div>
   </template>
 </body>

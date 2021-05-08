@@ -3,7 +3,7 @@ const projectForm = document.querySelector('.projects__form');
 const projectInput = document.querySelector('.projects__form__input')
 const tasksContainer = document.querySelector('.todos')
 const projectTitle = document.querySelector('.todos__title')
-const pendingTasksCount = document.querySelector('.todos__count');
+const pendingTasksCounter = document.querySelector('.todos__count');
 const projectDeleteButton = document.querySelector('.projects__delete_button');
 const taskTemplate = document.getElementById('task-template');
 const projectTasks = document.querySelector('.all_tasks');
@@ -17,11 +17,11 @@ let selectedProjectId = localStorage.getItem(selectedProjectIdKey);
 
 // Utility Functions
 function Project (name) {
-  return { id: Date.now().toString(), name: name, tasks: [{id: Date.now().toString(), name: 'Java OOP.'}] };
+  return { id: Date.now().toString(), name: name, tasks: [] };
 }
 
 function Task (name) {
-  return { id: Date.now().toString(), name: name, completed: false };
+  return { id: `task-${Date.now().toString()}`, name: name, completed: false };
 }
 
 function removeElements(parentElement) {
@@ -47,13 +47,19 @@ function renderTasks(selectedProject) {
   selectedProject.tasks.forEach(task => {
     const taskElement = document.importNode(taskTemplate.content, true);
     const checkBox = taskElement.querySelector('.todos__item');
-    checkBox.id = `task-${task.id}`;
+    checkBox.id = task.id;
     checkBox.checked = task.completed;
     const taskLabel = taskElement.querySelector('.todos__label');
-    taskLabel.htmlFor = `task-${task.id}`;
+    taskLabel.htmlFor = task.id;
     taskLabel.innerText = task.name;
     projectTasks.appendChild(taskElement);
   })
+}
+
+function renderPendingTasksCount(selectedProject) {
+  const pendingTasksCount = selectedProject.tasks.filter(task => !task.completed).length;
+  const pendingTasksDescription = pendingTasksCount === 1 ? 'task' : 'tasks';
+  pendingTasksCounter.innerText = `${pendingTasksCount} ${pendingTasksDescription} pending.`;
 }
 
 function renderProjectsAndTasks() {
@@ -66,9 +72,7 @@ function renderProjectsAndTasks() {
     tasksContainer.style.display = '';
     const selectedProject = projects.find(project => project.id === selectedProjectId)
     projectTitle.innerText = selectedProject.name;
-    const pendingTasks = selectedProject.tasks.length;
-    const pendingTasksDescription = pendingTasks === 1 ? 'task' : 'tasks';
-    pendingTasksCount.innerText = `${pendingTasks} ${pendingTasksDescription} pending`;
+    renderPendingTasksCount(selectedProject);
     removeElements(projectTasks);
     renderTasks(selectedProject);
   }
@@ -117,6 +121,24 @@ taskForm.addEventListener('submit', e => {
   const selectedProject = projects.find(project => project.id === selectedProjectId);
   selectedProject.tasks.push(newTask);
   saveRender();
+})
+
+projectTasks.addEventListener('click', e => {
+  const selectedProject = projects.find(project => project.id === selectedProjectId);
+
+  if (e.target.tagName === 'INPUT') {
+    const selectedTask = selectedProject.tasks.find(task => task.id === e.target.id);
+    selectedTask.completed = e.target.checked;
+    save();
+    renderPendingTasksCount(selectedProject);
+  }
+  else if(e.target.dataset.id === 'deleteSelectedTask'){
+    const selectedCheckBox = e.target.parentNode.firstChild.firstChild;
+    if (selectedCheckBox.checked) {
+      selectedProject.tasks = selectedProject.tasks.filter(task => !(task.id === selectedCheckBox.id));
+      saveRender();
+    }
+  }
 })
 
 renderProjectsAndTasks();
