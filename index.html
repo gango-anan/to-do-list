@@ -33,15 +33,7 @@
       <p class="todos__count"></p>
     </div>
     <div class="todos__body">
-      <div class="todos__tasks">
-        <div class="todos__task">
-          <input type="checkbox" id="task-3" class="todos__item"/>
-          <label for="task-3" class="todos__label">
-            Procedural Programming.
-          </label>
-        </div>
-        <div class="todos__delete"><i class="far fa-trash-alt"></i></div>
-      </div> 
+      <div class="todos__tasks"></div> 
       <div class="todos__creator">
         <form action="" class="todos__form">
           <input type="text" class="todos__input" placeholder="new task" aria-label="new task"/>
@@ -52,5 +44,12 @@
       </div>
     </div>
   </div>
+  <template id="task-template">
+    <div class="todos__task">
+      <input type="checkbox" class="todos__item"/>
+      <label class="todos__label"></label>
+    </div>
+    <div class="todos__delete"><i class="far fa-trash-alt"></i></div>
+  </template>
 </body>
 </html>
