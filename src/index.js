@@ -4,6 +4,7 @@ const projectInput = document.querySelector('.projects__form__input')
 const tasksContainer = document.querySelector('.todos')
 const projectTitle = document.querySelector('.todos__title')
 const pendingTasksCount = document.querySelector('.todos__count');
+const projectDeleteButton = document.querySelector('.projects__delete_button');
 
 const projectsKey = 'myProjects';
 const selectedProjectIdKey = 'mySelectedProjectId';
@@ -76,6 +77,12 @@ projectsContainer.addEventListener('click', e => {
     selectedProjectId = e.target.id;
     saveRender();
   }
+})
+
+projectDeleteButton.addEventListener('click', e => {
+  projects = projects.filter(project => project.id !== selectedProjectId);
+  selectedProjectId = null;
+  saveRender();
 })
 
 renderProjectsAndTasks();
