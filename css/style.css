@@ -131,11 +131,18 @@ body {
 
 .projects__delete_button {
   display: block;
-  color: var(--light-color);
-  font-size: 1.2rem;
   margin: 1rem auto;
-  background-color: var(--danger-color);
+  font-size: 1.2rem;
   border: 0px;
+  color: var(--danger-color);
+  cursor: pointer;
+  background: none;
+  font-weight: 500;
+}
+
+.projects__delete_button:hover {
+  color: var(--light-color);
+  background-color: var(--danger-color);
   padding: 0.5rem;
   border-radius: 5px;
 }
