@@ -6,7 +6,7 @@ const projectTitle = document.querySelector('.todos__title')
 const pendingTasksCount = document.querySelector('.todos__count');
 const projectDeleteButton = document.querySelector('.projects__delete_button');
 const taskTemplate = document.getElementById('task-template');
-const projectTasks = document.querySelector('todos__tasks');
+const projectTasks = document.querySelector('.todos__tasks');
 
 const projectsKey = 'myProjects';
 const selectedProjectIdKey = 'mySelectedProjectId';
@@ -15,7 +15,7 @@ let selectedProjectId = localStorage.getItem(selectedProjectIdKey);
 
 // Utility Functions
 function Project (name) {
-  return { id: Date.now().toString(), name: name, tasks: [] };
+  return { id: Date.now().toString(), name: name, tasks: [{id: Date.now().toString(), name: 'Java OOP.'}] };
 }
 
 function removeElements(parentElement) {
@@ -38,13 +38,13 @@ function renderProjects() {
 }
 
 function renderTasks(selectedProject) {
-  selectedProject.forEach(task => {
+  selectedProject.tasks.forEach(task => {
     const taskElement = document.importNode(taskTemplate.content, true);
     const checkBox = taskElement.querySelector('.todos__item');
-    checkBox.id = task.id;
+    checkBox.id = `task-${task.id}`;
     checkBox.checked = task.completed;
     const taskLabel = taskElement.querySelector('.todos__label');
-    taskLabel.htmlFor = task.id;
+    taskLabel.htmlFor = `task-${task.id}`;
     taskLabel.innerText = task.name;
     projectTasks.appendChild(taskElement);
   })
