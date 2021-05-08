@@ -6,7 +6,9 @@ const projectTitle = document.querySelector('.todos__title')
 const pendingTasksCount = document.querySelector('.todos__count');
 const projectDeleteButton = document.querySelector('.projects__delete_button');
 const taskTemplate = document.getElementById('task-template');
-const projectTasks = document.querySelector('.todos__tasks');
+const projectTasks = document.querySelector('.all_tasks');
+const taskForm = document.querySelector('.todos__form');
+const taskFormInput = document.querySelector('.todos__input');
 
 const projectsKey = 'myProjects';
 const selectedProjectIdKey = 'mySelectedProjectId';
@@ -16,6 +18,10 @@ let selectedProjectId = localStorage.getItem(selectedProjectIdKey);
 // Utility Functions
 function Project (name) {
   return { id: Date.now().toString(), name: name, tasks: [{id: Date.now().toString(), name: 'Java OOP.'}] };
+}
+
+function Task (name) {
+  return { id: Date.now().toString(), name: name, completed: false };
 }
 
 function removeElements(parentElement) {
@@ -99,6 +105,17 @@ projectsContainer.addEventListener('click', e => {
 projectDeleteButton.addEventListener('click', e => {
   projects = projects.filter(project => project.id !== selectedProjectId);
   selectedProjectId = null;
+  saveRender();
+})
+
+taskForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const taskName = taskFormInput.value;
+  if (taskName === null || taskName === '') return;
+  const newTask = Task(taskName);
+  taskFormInput.value = null;
+  const selectedProject = projects.find(project => project.id === selectedProjectId);
+  selectedProject.tasks.push(newTask);
   saveRender();
 })
 
