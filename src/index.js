@@ -5,6 +5,8 @@ const tasksContainer = document.querySelector('.todos')
 const projectTitle = document.querySelector('.todos__title')
 const pendingTasksCount = document.querySelector('.todos__count');
 const projectDeleteButton = document.querySelector('.projects__delete_button');
+const taskTemplate = document.getElementById('task-template');
+const projectTasks = document.querySelector('todos__tasks');
 
 const projectsKey = 'myProjects';
 const selectedProjectIdKey = 'mySelectedProjectId';
@@ -35,6 +37,19 @@ function renderProjects() {
   })
 }
 
+function renderTasks(selectedProject) {
+  selectedProject.forEach(task => {
+    const taskElement = document.importNode(taskTemplate.content, true);
+    const checkBox = taskElement.querySelector('.todos__item');
+    checkBox.id = task.id;
+    checkBox.checked = task.completed;
+    const taskLabel = taskElement.querySelector('.todos__label');
+    taskLabel.htmlFor = task.id;
+    taskLabel.innerText = task.name;
+    projectTasks.appendChild(taskElement);
+  })
+}
+
 function renderProjectsAndTasks() {
   removeElements(projectsContainer);
   renderProjects();
@@ -48,6 +63,8 @@ function renderProjectsAndTasks() {
     const pendingTasks = selectedProject.tasks.length;
     const pendingTasksDescription = pendingTasks === 1 ? 'task' : 'tasks';
     pendingTasksCount.innerText = `${pendingTasks} ${pendingTasksDescription} pending`;
+    removeElements(projectTasks);
+    renderTasks(selectedProject);
   }
 
 }
