@@ -13,7 +13,7 @@
 
 ## Live Demo
 
-[Live Demo Link]()
+[Live Demo Link](https://gango-anan.github.io/to-do-list/)
 
 
 ## Getting Started
@@ -74,4 +74,4 @@ Give a ⭐️ if you like this project!
 
 ## 📝 License
 
-This project is [MIT]() licensed.
+This project is [MIT](https://github.com/gango-anan/to-do-list/blob/todo-features/LICENSE) licensed.
