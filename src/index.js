@@ -15,20 +15,40 @@ function Project (name) {
   return { id: Date.now().toString(), name: name, tasks: [] };
 }
 
+function removeElements(parentElement) {
+  while(parentElement.lastChild){
+    parentElement.removeChild(parentElement.lastChild);
+  }
+}
+
 function renderProjects() {
   projects.forEach(project => {
     const projectItem = document.createElement('li');
     projectItem.classList.add('projects__item');
-    projectItem.setAttribute('id', `1`);
+    projectItem.setAttribute('id', `${project.id}`);
+    if (project.id === selectedProjectId) {
+      projectItem.classList.add('projects__item--active');
+    }
     projectItem.innerText = project.name;
     projectsContainer.appendChild(projectItem);
   })
 }
 
-function removeElements(parentElement) {
-  while(parentElement.lastChild){
-    parentElement.removeChild(parentElement.lastChild);
+function renderProjectsAndTasks() {
+  removeElements(projectsContainer);
+  renderProjects();
+  
+  if (selectedProjectId === null) {
+    tasksContainer.style.display = 'none';
+  } else {
+    tasksContainer.style.display = '';
+    const selectedProject = projects.find(project => project.id === selectedProjectId)
+    projectTitle.innerText = selectedProject.name;
+    const pendingTasks = selectedProject.tasks.length;
+    const pendingTasksDescription = pendingTasks === 1 ? 'task' : 'tasks';
+    pendingTasksCount.innerText = `${pendingTasks} ${pendingTasksDescription} pending`;
   }
+
 }
 
 function save() {
@@ -36,37 +56,26 @@ function save() {
   localStorage.setItem(selectedProjectIdKey, selectedProjectId);
 }
 
-// Event Listeners
-formProject.addEventListener('submit',(e) => {
-  e.preventDefault();
-  const newProjectvalue = projectInput.value;
-  if (newProjectvalue === null || newProjectvalue === '') return;
-  const newProject = Project(newProjectvalue);
-  projects.push(newProject);
+function saveRender() {
   save();
+  renderProjectsAndTasks();
+}
+// Event Listeners
+projectForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const newProjectValue = projectInput.value;
+  if (newProjectValue === null || newProjectValue === '') return;
+  const newProject = Project(newProjectValue);
+  projects.push(newProject);
   projectInput.value = null;
-  removeElements(projectsContainer);
-  renderProjects();
+  saveRender();
 })
 
-projectsContainer.addEventListener('click', (e) => {
+projectsContainer.addEventListener('click', e => {
   if(e.target.tagName === 'LI'){
-    removeActiveClass(projectsContainer);
-    e.target.classList.add('projects__item--active');
-    tasksContainer.classList.remove('hide')
-    removeElements(projectTitleContainer)
-    renderTasks(e.target);
+    selectedProjectId = e.target.id;
+    saveRender();
   }
 })
 
-function renderTasks(element) {
-  const tasksTitle = document.createElement('h2');
-  const tasksCount = document.createElement('p');
-  tasksTitle.innerText = element.innerText;
-  tasksTitle.classList.add("todos__title");
-  tasksCount.innerText = "3 tasks pending";
-  tasksCount.classList.add("todos__count")
-  projectTitleContainer.append(tasksTitle,tasksCount)
-}
-
-renderProjects();
+renderProjectsAndTasks();
