@@ -5,9 +5,15 @@ const tasksContainer = document.querySelector('.todos')
 const projectTitleContainer = document.querySelector('.todos__header')
 
 const projectsKey = 'myProjects';
-let projects = JSON.parse(localStorage.getItem('myProjects')) || [{name:"General",tasks: []}];
+const selectedProjectIdKey = 'mySelectedProjectId';
+let projects = JSON.parse(localStorage.getItem(projectsKey)) || [{id: Date.now().toString(), name: "General", tasks: []}];
+let selectedProjectId = localStorage.getItem(selectedProjectIdKey);
 
 // Utility Functions
+function Project (name) {
+  return { id: Date.now().toString(), name: name, tasks: [] };
+}
+
 function renderProjects() {
   projects.forEach(project => {
     const projectItem = document.createElement('li');
@@ -24,11 +30,6 @@ function removeElements(parentElement) {
   }
 }
 
-function Project (name, tasks =[]) {
-    this.name = name
-    this.tasks = tasks
-}
-
 function removeActiveClass(parentElement) {
   parentElement.childNodes.forEach(element => {
     element.classList.remove('projects__item--active');
@@ -40,7 +41,7 @@ formProject.addEventListener('submit',(e) => {
   e.preventDefault();
   const newProjectvalue = projectInput.value;
   if (newProjectvalue === null || newProjectvalue === '') return;
-  const newProject = new Project(newProjectvalue);
+  const newProject = Project(newProjectvalue);
   projects.push(newProject);
   localStorage.setItem('myProjects', JSON.stringify(projects));
   projectInput.value = null;
