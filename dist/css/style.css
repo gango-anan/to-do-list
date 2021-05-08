@@ -118,6 +118,7 @@ body {
 .projects__form__button {
   display: block;
   margin: auto;
+  cursor: pointer;
   padding: 0.8rem 1.5rem;
   width: -webkit-fit-content;
   width: -moz-fit-content;
