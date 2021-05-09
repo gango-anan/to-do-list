@@ -65,7 +65,6 @@ function renderPendingTasksCount(selectedProject) {
 function renderProjectsAndTasks() {
   removeElements(projectsContainer);
   renderProjects();
-  
   if (selectedProjectId === null) {
     tasksContainer.style.display = 'none';
   } else {
