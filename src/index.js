@@ -13,7 +13,7 @@ const taskFormInput = document.querySelector('.todos__input');
 const projectsKey = 'myProjects';
 const selectedProjectIdKey = 'mySelectedProjectId';
 let projects = JSON.parse(localStorage.getItem(projectsKey)) || [{ id: Date.now().toString(), name: 'General', tasks: [] }];
-let selectedProjectId = localStorage.getItem(selectedProjectIdKey);
+let selectedProjectId = JSON.parse(localStorage.getItem(selectedProjectIdKey));
 
 // Utility Functions
 function Project(name) {
@@ -65,7 +65,7 @@ function renderPendingTasksCount(selectedProject) {
 function renderProjectsAndTasks() {
   removeElements(projectsContainer);
   renderProjects();
-
+  
   if (selectedProjectId === null) {
     tasksContainer.style.display = 'none';
   } else {
@@ -80,7 +80,7 @@ function renderProjectsAndTasks() {
 
 function save() {
   localStorage.setItem(projectsKey, JSON.stringify(projects));
-  localStorage.setItem(selectedProjectIdKey, selectedProjectId);
+  localStorage.setItem(selectedProjectIdKey, JSON.stringify(selectedProjectId));
 }
 
 function saveRender() {
