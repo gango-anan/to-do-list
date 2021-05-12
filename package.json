@@ -22,5 +22,8 @@
     "stylelint-scss": "^3.19.0",
     "webpack": "^5.36.2",
     "webpack-cli": "^4.7.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3"
   }
 }

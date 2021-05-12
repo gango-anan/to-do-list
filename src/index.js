@@ -1,3 +1,7 @@
+import Project from './project';
+import Task from './task';
+import '@fortawesome/fontawesome-free/js/all.js'
+
 const projectsContainer = document.querySelector('.projects__list');
 const projectForm = document.querySelector('.projects__form');
 const projectInput = document.querySelector('.projects__form__input');
@@ -16,14 +20,6 @@ let projects = JSON.parse(localStorage.getItem(projectsKey)) || [{ id: Date.now(
 let selectedProjectId = JSON.parse(localStorage.getItem(selectedProjectIdKey));
 
 // Utility Functions
-function Project(name) {
-  return { id: Date.now().toString(), name, tasks: [] };
-}
-
-function Task(name) {
-  return { id: `task-${Date.now().toString()}`, name, completed: false };
-}
-
 function removeElements(parentElement) {
   while (parentElement.lastChild) {
     parentElement.removeChild(parentElement.lastChild);
