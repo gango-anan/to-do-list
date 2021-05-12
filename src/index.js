@@ -170,19 +170,34 @@ editTaskFormElement.addEventListener('submit', (e) => {
 
 projectTasks.addEventListener('click', (e) => {
   const activeProject = projects.find((project) => project.id === selectedProjectId);
-
+​
   if (e.target.tagName === 'INPUT') {
     const selectedTask = activeProject.tasks.find((task) => task.id === e.target.id);
+    selectedTaskId = selectedTask.id
     selectedTask.completed = e.target.checked;
     save();
     renderPendingTasksCount(activeProject);
   } else if (e.target.dataset.id === 'deleteSelectedTask') {
     const activeCheckBox = e.target.parentNode.firstChild.firstChild;
-    if (activeCheckBox.checked) {
-      activeProject.tasks = activeProject.tasks.filter((task) => !(task.id === activeCheckBox.id));
-      saveRender();
-    }
+    activeProject.tasks = activeProject.tasks.filter((task) => !(task.id === activeCheckBox.id));
+    saveRender();
+  } else if (e.target.tagName === 'LABEL') {
+    const taskDetails = e.target.parentNode.parentNode.parentNode.lastChild;
+    e.target.style.fontSize = '1.4rem'
+    taskDetails.style.display = '';
+  } else if (e.target.id === 'edit') {
+    taskCreatorElement.classList.remove('hide');
+    taskForm.style.display = 'none';
+    editTaskFormElement.style.display = '';
+    projectTasks.style.display = 'none';
+    newTaskButton.style.display = 'none';
+    const activeTask = activeProject.tasks.find((task) => task.id === selectedTaskId);
+    taskEditTitleElement.value = `${ activeTask.name }`;
+    taskEditDescriptionElement.value = `${ activeTask.description}`;
+    taskEditPriorityElement.value = activeTask.priority;
+    taskEditDueDateElement.value = activeTask.dueDate;
   }
+​
 });
 
 renderProjectsAndTasks();
