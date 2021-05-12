@@ -39,7 +39,8 @@ function renderProjects() {
   });
 }
 
-function renderTasks(selectedProject) {
+
+const renderTasks = (selectedProject) => {
   selectedProject.tasks.forEach((task) => {
     const taskElement = document.importNode(taskTemplate.content, true);
     const checkBox = taskElement.querySelector('.todos__item');
@@ -47,7 +48,15 @@ function renderTasks(selectedProject) {
     checkBox.checked = task.completed;
     const taskLabel = taskElement.querySelector('.todos__label');
     taskLabel.htmlFor = task.id;
-    taskLabel.innerText = task.name;
+    taskLabel.innerHTML = `${task.name}  &nbsp; - &nbsp;  due on ${task.dueDate}`;
+    taskLabel.style.fontWeight = 'bold';
+    taskLabel.style.color = task.priority === 1 ? '#ff0000': task.priority === 2 ? '#f5f50f' : '#61f30d';
+    const descriptP = taskElement.getElementById('descrip');
+    descriptP.innerText = task.description;
+    const priorityP = taskElement.getElementById('prio');
+    priorityP.innerText = `Priority : ${task.priority === 1 ? 'High': task.priority === 2 ? 'Medium' : 'Low'}`;
+    const taskDetails = taskElement.querySelector('.todos__task-details');
+    taskDetails.style.display = 'none';
     projectTasks.appendChild(taskElement);
   });
 }
