@@ -1,7 +1,7 @@
 import Project from './project';
 import Task from './task';
 import '@fortawesome/fontawesome-free/js/all.js'
-
+​
 const projectsContainer = document.querySelector('.projects__list');
 const projectForm = document.querySelector('.projects__form');
 const projectInput = document.querySelector('.projects__form__input');
@@ -9,23 +9,52 @@ const tasksContainer = document.querySelector('.todos');
 const projectTitle = document.querySelector('.todos__title');
 const pendingTasksCounter = document.querySelector('.todos__count');
 const projectDeleteButton = document.querySelector('.projects__delete_button');
+​
 const taskTemplate = document.getElementById('task-template');
-const projectTasks = document.querySelector('.all_tasks');
-const taskForm = document.querySelector('.todos__form');
-const taskFormInput = document.querySelector('.todos__input');
-
+const projectTasks = document.querySelector('.todos__all-tasks');
+const taskForm = document.getElementById('todos-form');
+const newTaskButton = document.querySelector('.todos__new-task-button');
+const taskTitleElement = document.querySelector('.todos__input');
+const taskDescriptionElement = document.getElementById('description');
+const taskDueDateElement = document.getElementById('due-date');
+const taskPriorityElement = document.getElementById('priority');
+const taskCreatorElement = document.querySelector('.todos__creator');
+const editTaskFormElement = document.getElementById('todos-edit-form');
+const taskEditTitleElement = document.getElementById('title2');
+const taskEditDescriptionElement = document.getElementById('description2');
+const taskEditDueDateElement = document.getElementById('due-date2');
+const taskEditPriorityElement = document.getElementById('priority2');
+​
 const projectsKey = 'myProjects';
 const selectedProjectIdKey = 'mySelectedProjectId';
+const selectedTaskIdKey = 'mySelectedTaskId';
 let projects = JSON.parse(localStorage.getItem(projectsKey)) || [{ id: Date.now().toString(), name: 'General', tasks: [] }];
+​
 let selectedProjectId = JSON.parse(localStorage.getItem(selectedProjectIdKey));
-
+let selectedTaskId = JSON.parse(localStorage.getItem(selectedTaskIdKey));
+​
 // Utility Functions
-const removeElements = (parentElement) =>{
+const removeElements = (parentElement) => {
   while (parentElement.lastChild) {
     parentElement.removeChild(parentElement.lastChild);
   }
 }
-
+​
+const renderProjectsAndTasks = () => {
+  removeElements(projectsContainer);
+  renderProjects();
+  if (selectedProjectId === null) {
+    tasksContainer.style.display = 'none';
+  } else {
+    tasksContainer.style.display = '';
+    const selectedProject = projects.find((project) => project.id === selectedProjectId);
+    projectTitle.innerText = selectedProject.name;
+    renderPendingTasksCount(selectedProject);
+    removeElements(projectTasks);
+    renderTasks(selectedProject);
+  }
+}
+​
 const renderProjects = () => {
   projects.forEach((project) => {
     const projectItem = document.createElement('li');
@@ -38,8 +67,7 @@ const renderProjects = () => {
     projectsContainer.appendChild(projectItem);
   });
 }
-
-
+​
 const renderTasks = (selectedProject) => {
   selectedProject.tasks.forEach((task) => {
     const taskElement = document.importNode(taskTemplate.content, true);
@@ -60,34 +88,19 @@ const renderTasks = (selectedProject) => {
     projectTasks.appendChild(taskElement);
   });
 }
-
+​
 const renderPendingTasksCount = (selectedProject) => {
   const pendingTasksCount = selectedProject.tasks.filter((task) => !task.completed).length;
   const pendingTasksDescription = pendingTasksCount === 1 ? 'task' : 'tasks';
   pendingTasksCounter.innerText = `${pendingTasksCount} ${pendingTasksDescription} pending.`;
 }
-
-const renderProjectsAndTasks = () => {
-  removeElements(projectsContainer);
-  renderProjects();
-  if (selectedProjectId === null) {
-    tasksContainer.style.display = 'none';
-  } else {
-    tasksContainer.style.display = '';
-    const selectedProject = projects.find((project) => project.id === selectedProjectId);
-    projectTitle.innerText = selectedProject.name;
-    renderPendingTasksCount(selectedProject);
-    removeElements(projectTasks);
-    renderTasks(selectedProject);
-  }
-}
-
+​
 const save = () => {
   localStorage.setItem(projectsKey, JSON.stringify(projects));
   localStorage.setItem(selectedProjectIdKey, JSON.stringify(selectedProjectId));
   localStorage.setItem(selectedTaskIdKey, JSON.stringify(selectedTaskId));
 }
-
+​
 const saveRender = () => {
   save();
   renderProjectsAndTasks();
@@ -102,20 +115,23 @@ projectForm.addEventListener('submit', (e) => {
   projectInput.value = null;
   saveRender();
 });
-
+​
 projectsContainer.addEventListener('click', (e) => {
   if (e.target.tagName === 'LI') {
     selectedProjectId = e.target.id;
+    projectTasks.style.display = '';
+    newTaskButton.style.display = '';
+    taskCreatorElement.classList.add('hide');
     saveRender();
   }
 });
-
+​
 projectDeleteButton.addEventListener('click', () => {
   projects = projects.filter((project) => project.id !== selectedProjectId);
   selectedProjectId = null;
   saveRender();
 });
-
+​
 taskForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const taskName = taskTitleElement.value;
@@ -147,7 +163,7 @@ taskForm.addEventListener('submit', (e) => {
   newTaskButton.style.display = '';
   taskCreatorElement.classList.add('hide');
 });
-
+​
 editTaskFormElement.addEventListener('submit', (e) => {
   e.preventDefault();
   const selectedProject = projects.find((project) => project.id === selectedProjectId);
@@ -167,7 +183,7 @@ editTaskFormElement.addEventListener('submit', (e) => {
   newTaskButton.style.display = '';
   taskCreatorElement.classList.add('hide');
 });
-
+​
 projectTasks.addEventListener('click', (e) => {
   const activeProject = projects.find((project) => project.id === selectedProjectId);
 ​
@@ -199,12 +215,20 @@ projectTasks.addEventListener('click', (e) => {
   }
 ​
 });
-
+​
 newTaskButton.addEventListener('click', (e) => {
   taskCreatorElement.classList.remove('hide');
   editTaskFormElement.style.display = 'none';
   projectTasks.style.display = 'none';
   newTaskButton.style.display = 'none';
 })
-
+​
+taskCreatorElement.addEventListener('click', (e) => {
+  if(e.target.id === 'close') {
+    taskCreatorElement.classList.add('hide');
+    projectTasks.style.display = '';
+    newTaskButton.style.display = '';
+  }
+})
+​
 renderProjectsAndTasks();
