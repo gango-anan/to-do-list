@@ -358,7 +358,6 @@ h3 {
   color: var(--light-color);
   background-color: var(--primary-color);
   border-radius: 5px;
-  background-color: var(--primary-color);
 }
 
 .todos__new-task-button {
