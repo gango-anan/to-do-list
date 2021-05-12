@@ -118,13 +118,34 @@ projectDeleteButton.addEventListener('click', () => {
 
 taskForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  const taskName = taskFormInput.value;
+  const taskName = taskTitleElement.value;
+  const taskDescription = taskDescriptionElement.value;
+  const taskDueDate = taskDueDateElement.value;
+  const taskPriority = parseInt(taskPriorityElement.value, 10);
   if (taskName === null || taskName === '') return;
-  const newTask = Task(taskName);
-  taskFormInput.value = null;
+  const newTask = Task(taskName, taskDescription, taskDueDate, taskPriority);
+  taskTitleElement.value = null;
+  taskDescriptionElement.value = null;
+  taskDueDateElement.value = null;
+  taskPriorityElement.value = null;
   const selectedProject = projects.find((project) => project.id === selectedProjectId);
   selectedProject.tasks.push(newTask);
+  selectedProject.tasks.sort((a, b) => {
+    const priorityA = a.priority; 
+    const priorityB = b.priority; 
+    if (priorityA < priorityB) {
+      return -1;
+    }
+    if (priorityA > priorityB) {
+      return 1;
+    }
+  
+    return 0;
+  });
   saveRender();
+  projectTasks.style.display = '';
+  newTaskButton.style.display = '';
+  taskCreatorElement.classList.add('hide');
 });
 
 projectTasks.addEventListener('click', (e) => {
