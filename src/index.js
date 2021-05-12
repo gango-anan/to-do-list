@@ -85,6 +85,7 @@ const renderProjectsAndTasks = () => {
 const save = () => {
   localStorage.setItem(projectsKey, JSON.stringify(projects));
   localStorage.setItem(selectedProjectIdKey, JSON.stringify(selectedProjectId));
+  localStorage.setItem(selectedTaskIdKey, JSON.stringify(selectedTaskId));
 }
 
 const saveRender = () => {
