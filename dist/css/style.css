@@ -5,9 +5,9 @@
   --light-color: #fff;
   --tertiary-color: #a19c9c;
   --danger-color: #f56f78;
-  --general-spacer: 3rem;
+  --general-spacer: 2rem;
   --minimum-height: 50vh;
-  --spacer: 2rem;
+  --spacer: 1.5rem;
 }
 
 * {
@@ -24,12 +24,18 @@ body {
   background-color: var(--secondary-color);
 }
 
+h3 {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
 .app-title {
   grid-area: header;
   text-align: center;
   color: var(--light-color);
   font-weight: bolder;
   font-size: 3rem;
+  margin-bottom: 0;
 }
 
 .projects {
@@ -57,17 +63,23 @@ body {
 
 .projects__list {
   padding-left: 1rem;
-  line-height: var(--general-spacer);
+  line-height: 3rem;
   list-style-type: circle;
 }
 
 .projects__item {
-  cursor: pointer;
   font-size: 1.2rem;
 }
 
 .projects__item--active {
   font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.projects__item:hover {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 
 .projects__form {
@@ -92,7 +104,7 @@ body {
   border-bottom: 2px solid var(--tertiary-color);
   text-align: center;
   padding: 0.5rem 0;
-  outline: 0px;
+  outline: 0;
 }
 
 .projects__form__input:focus {
@@ -123,7 +135,7 @@ body {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  border: 0px;
+  border: 0;
   font-size: 1.5rem;
   color: var(--light-color);
   background-color: var(--primary-color);
@@ -134,7 +146,7 @@ body {
   display: block;
   margin: 1rem auto;
   font-size: 1.2rem;
-  border: 0px;
+  border: 0;
   color: var(--danger-color);
   cursor: pointer;
   background: none;
@@ -173,15 +185,22 @@ body {
 }
 
 .todos__body {
-  margin-top: var(--spacer);
+  margin-top: 1.5rem;
   background-color: var(--light-color);
-  padding: var(--general-spacer) var(--spacer);
+  padding: var(--spacer) var(--spacer);
   min-height: var(--minimum-height);
   -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  position: relative;
-  line-height: var(--general-spacer);
   border-bottom-left-radius: 32px;
+  position: relative;
+}
+
+.todos__container {
+  margin-bottom: 1rem;
+}
+
+.todos__task-details {
+  margin-left: var(--general-spacer);
 }
 
 .todos__tasks {
@@ -251,60 +270,98 @@ body {
   cursor: pointer;
 }
 
+.todos__edit {
+  color: green;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+.todos__edit:hover {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
 .todos__creator {
+  position: relative;
+}
+
+.todos__close {
   position: absolute;
-  left: 35%;
-  bottom: -25px;
+  color: #ddd7ce;
+  top: 0;
+  right: 1rem;
+  font-size: 4rem;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
 }
 
 .todos__form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  padding: 3rem;
+  width: 80%;
+  margin: auto;
 }
 
-.todos__input {
-  margin-bottom: var(--spacer);
+.todos__form__inputs input,
+.todos__form__inputs select {
+  border: 2px solid #f0f0f0;
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.todos__form__inputs input:focus,
+.todos__form__inputs select:focus {
+  outline: 0;
+  border-color: #7bf77b;
+}
+
+.todos__form__inputs input:focus::-webkit-input-placeholder,
+.todos__form__inputs select:focus::-webkit-input-placeholder {
+  opacity: 0.2;
+}
+
+.todos__form__inputs input:focus:-ms-input-placeholder,
+.todos__form__inputs select:focus:-ms-input-placeholder {
+  opacity: 0.2;
+}
+
+.todos__form__inputs input:focus::-ms-input-placeholder,
+.todos__form__inputs select:focus::-ms-input-placeholder {
+  opacity: 0.2;
+}
+
+.todos__form__inputs input:focus::placeholder,
+.todos__form__inputs select:focus::placeholder {
+  opacity: 0.2;
+}
+
+.todos__form__inputs label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.todos__form__btn {
+  display: block;
+  margin: var(--spacer) auto;
+  cursor: pointer;
+  padding: 0.8rem 1.5rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   border: 0;
   font-size: 1.2rem;
-  opacity: 0.5;
-  border-bottom: 2px solid var(--secondary-color);
-  text-align: center;
-  padding: 0.5rem 0;
-  outline: 0px;
+  color: var(--light-color);
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  background-color: var(--primary-color);
 }
 
-.todos__input:focus {
-  border-bottom-width: 4px;
-}
-
-.todos__input:focus::-webkit-input-placeholder {
-  opacity: 0.2;
-}
-
-.todos__input:focus:-ms-input-placeholder {
-  opacity: 0.2;
-}
-
-.todos__input:focus::-ms-input-placeholder {
-  opacity: 0.2;
-}
-
-.todos__input:focus::placeholder {
-  opacity: 0.2;
-}
-
-.todos__button {
+.todos__new-task-button {
   display: inline-block;
   padding: 1rem 2rem;
   font-size: 1.5rem;
@@ -315,5 +372,12 @@ body {
   border-radius: 40px;
   text-align: center;
   cursor: pointer;
+  position: absolute;
+  left: 35%;
+  bottom: -25px;
+}
+
+.hide {
+  display: none;
 }
 /*# sourceMappingURL=style.css.map */
