@@ -148,6 +148,26 @@ taskForm.addEventListener('submit', (e) => {
   taskCreatorElement.classList.add('hide');
 });
 
+editTaskFormElement.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const selectedProject = projects.find((project) => project.id === selectedProjectId);
+  const selectedTask = selectedProject.tasks.find((task) => task.id === selectedTaskId);
+  const taskName = taskEditTitleElement.value;
+  const taskDescription = taskEditDescriptionElement.value;
+  const taskDueDate = taskEditDueDateElement.value;
+  const taskPriority = parseInt(taskEditPriorityElement.value, 10);
+​
+  if (taskName === null || taskName === '') return;
+  selectedTask.name = taskName;
+  selectedTask.description = taskDescription;
+  selectedTask.dueDate = taskDueDate;
+  selectedTask.priority = taskPriority;
+  saveRender();
+  projectTasks.style.display = '';
+  newTaskButton.style.display = '';
+  taskCreatorElement.classList.add('hide');
+});
+
 projectTasks.addEventListener('click', (e) => {
   const activeProject = projects.find((project) => project.id === selectedProjectId);
 
