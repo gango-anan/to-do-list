@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To Do List</title>
   <link rel="stylesheet" href="./css/style.css">
-  <script defer src="https://kit.fontawesome.com/81f483528b.js" crossorigin="anonymous"></script>
   <script defer src="main.js"></script>
 </head>
 <body>
@@ -33,20 +32,69 @@
       <p class="todos__count"></p>
     </div>
     <div class="todos__body">
-      <div class="all_tasks"></div>
-      <div class="todos__creator">
-        <form action="" class="todos__form">
-          <input type="text" class="todos__input" placeholder="new task" aria-label="new task"/>
-          <button class="todos__button">+ New task</button>
+      <div class="todos__all-tasks"></div>
+      <div class="todos__creator hide">
+        <button type="button" class="todos__close">
+          <span id="close">&times;</span>
+        </button>
+        <form action="" class="todos__form" id="todos-form">
+          <h3>Create New Task</h3>
+          <div class="todos__form__inputs">
+            <label for="title">Title:</label>
+            <input type="text" class="todos__input" id="title" placeholder="new task" aria-label="new task"/>
+          </div>
+          <div class="todos__form__inputs">
+            <label for="description">Description:</label>
+            <input type="text" class="todos__description" id="description" placeholder="Description" aria-label="new task"/>
+          </div>
+          <div class="todos__form__inputs">
+            <label for="due-date">Due date:</label>
+            <input type="date" class="todos__due-date" id="due-date" placeholder="Date" aria-label="new task"/>
+          </div>
+          <div class="todos__form__inputs">
+            <label for="priority">Priority:</label>
+            <select name="pets" id="priority" form ="todos-form">
+              <option value="">--Please select the priority--</option>
+              <option value="1">High</option>
+              <option value="2">Medium</option>
+              <option value="3">Low</option>
+          </select>
+          </div>
+          <button class="todos__form__btn">Create task</button>
+        </form>
+        <form action="" class="todos__form todos-edit-form" id="todos-edit-form">
+          <h3>Edit Task</h3>
+          <div class="todos__form__inputs">
+            <label for="title2">Title:</label>
+            <input type="text" class="todos__input" id="title2" placeholder="Edit title" aria-label="Edit title"/>
+          </div>
+          <div class="todos__form__inputs">
+            <label for="description2">Edit description:</label>
+            <input type="text" class="todos__description" id="description2" placeholder="Description" aria-label="new task"/>
+          </div>
+          <div class="todos__form__inputs">
+            <label for="due-date2">Edit due date:</label>
+            <input type="date" class="todos__due-date" id="due-date2" placeholder="Due date" aria-label="Due date"/>
+          </div>
+          <div class="todos__form__inputs">
+            <label for="priority2">Priority:</label>
+            <select name="pets" id="priority2" form ="todos-form"><option value="" id="default"></option>
+              <option value="1">High</option>
+              <option value="2">Medium</option>
+              <option value="3">Low</option>
+          </select>
+          </div>
+          <button class="todos__form__btn">Edit task</button>
         </form>
       </div>
+      <button class="todos__new-task-button">+ New task</button>
     </div>
   </div>
 
   <template id="task-template">
-    <div class="todos__tasks"><div class="todos__task"><input type="checkbox" class="todos__item"/><label class="todos__label"></label></div>
-      <i class="todos__delete far fa-trash-alt" id="del" data-id="deleteSelectedTask"></i>
-    </div>
+    <div class="todos__container"><div class="todos__tasks"><div class="todos__task"><input type="checkbox" class="todos__item"/><label class="todos__label"></label></div><i class="todos__edit" id="edit">Edit</i><i class="todos__delete far fa-trash-alt" id="del" data-id="deleteSelectedTask"></i></div><div class="todos__task-details">
+        <p id="descrip"></p>
+        <p id="prio"></p></div></div>
   </template>
 </body>
 </html>
