@@ -20,13 +20,13 @@ let projects = JSON.parse(localStorage.getItem(projectsKey)) || [{ id: Date.now(
 let selectedProjectId = JSON.parse(localStorage.getItem(selectedProjectIdKey));
 
 // Utility Functions
-function removeElements(parentElement) {
+const removeElements = (parentElement) =>{
   while (parentElement.lastChild) {
     parentElement.removeChild(parentElement.lastChild);
   }
 }
 
-function renderProjects() {
+const renderProjects = () => {
   projects.forEach((project) => {
     const projectItem = document.createElement('li');
     projectItem.classList.add('projects__item');
@@ -61,13 +61,13 @@ const renderTasks = (selectedProject) => {
   });
 }
 
-function renderPendingTasksCount(selectedProject) {
+const renderPendingTasksCount = (selectedProject) => {
   const pendingTasksCount = selectedProject.tasks.filter((task) => !task.completed).length;
   const pendingTasksDescription = pendingTasksCount === 1 ? 'task' : 'tasks';
   pendingTasksCounter.innerText = `${pendingTasksCount} ${pendingTasksDescription} pending.`;
 }
 
-function renderProjectsAndTasks() {
+const renderProjectsAndTasks = () => {
   removeElements(projectsContainer);
   renderProjects();
   if (selectedProjectId === null) {
@@ -82,12 +82,12 @@ function renderProjectsAndTasks() {
   }
 }
 
-function save() {
+const save = () => {
   localStorage.setItem(projectsKey, JSON.stringify(projects));
   localStorage.setItem(selectedProjectIdKey, JSON.stringify(selectedProjectId));
 }
 
-function saveRender() {
+const saveRender = () => {
   save();
   renderProjectsAndTasks();
 }
