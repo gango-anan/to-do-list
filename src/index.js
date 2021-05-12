@@ -200,4 +200,11 @@ projectTasks.addEventListener('click', (e) => {
 ​
 });
 
+newTaskButton.addEventListener('click', (e) => {
+  taskCreatorElement.classList.remove('hide');
+  editTaskFormElement.style.display = 'none';
+  projectTasks.style.display = 'none';
+  newTaskButton.style.display = 'none';
+})
+
 renderProjectsAndTasks();
