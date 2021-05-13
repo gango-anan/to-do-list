@@ -311,7 +311,6 @@ h3 {
   width: 100%;
   padding: 0.5rem;
   font-size: 1rem;
-  margin-bottom: 1rem;
 }
 
 .todos__form__inputs input:focus,
@@ -342,7 +341,7 @@ h3 {
 
 .todos__form__inputs label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin: 1rem 0 0.5rem 0;
 }
 
 .todos__form__btn {
@@ -374,6 +373,10 @@ h3 {
   position: absolute;
   left: 35%;
   bottom: -25px;
+}
+
+.todos small {
+  color: red;
 }
 
 .hide {
