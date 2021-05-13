@@ -40,6 +40,14 @@ const removeElements = (parentElement) => {
   }
 };
 
+const displayElement = (element) => {
+  element.style.display = '';
+};
+
+const removeDisplay = (element) => {
+  element.style.display = 'none';
+};
+
 const renderProjects = () => {
   projects.forEach((project) => {
     const projectItem = document.createElement('li');
@@ -117,14 +125,6 @@ const saveRender = () => {
   save();
   renderProjectsAndTasks();
 };
-
-const displayElement = (element) => {
-  element.style.display = ''
-}
-
-const removeDisplay = (element) => {
-  element.style.display = 'none';
-}
 // Event Listeners
 projectForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -158,7 +158,7 @@ taskForm.addEventListener('submit', (e) => {
   const taskDescription = taskDescriptionElement.value;
   const taskDueDate = taskDueDateElement.value;
   const taskPriority = parseInt(taskPriorityElement.value, 10);
-  if (taskName === null || taskName === '') return;
+  checkEmptyInput(taskName, taskDescription, taskDueDate, taskPriority);
   const newTask = Task(taskName, taskDescription, taskDueDate, taskPriority);
   taskTitleElement.value = null;
   taskDescriptionElement.value = null;
