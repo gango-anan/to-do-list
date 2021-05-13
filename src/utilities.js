@@ -1,10 +1,3 @@
-const checkEmptyInput = (entryOne, entryTwo, entryThree, entryFour) => {
-  if (entryOne === null || entryOne === '') return;
-  if (entryTwo === null || entryTwo === '') return;
-  if (entryThree === null || entryThree === '') return;
-  if (entryFour === null || entryFour === '') return;
-};
-
 const removeElements = (parent) => {
   while (parent.lastChild) {
     parent.removeChild(parent.lastChild);
@@ -20,5 +13,5 @@ const removeDisplay = (element) => {
 };
 
 export {
-  checkEmptyInput, removeElements, displayElement, removeDisplay,
+  removeElements, displayElement, removeDisplay,
 };

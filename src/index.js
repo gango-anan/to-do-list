@@ -1,7 +1,7 @@
 import Project from './project';
 import { Task, sortTasks } from './task';
 import {
-  checkEmptyInput, removeElements, displayElement, removeDisplay,
+  removeElements, displayElement, removeDisplay,
 } from './utilities';
 import '@fortawesome/fontawesome-free/js/all';
 
@@ -38,6 +38,12 @@ let selectedProjectId = JSON.parse(localStorage.getItem(selectedProjectIdKey));
 let selectedTaskId = JSON.parse(localStorage.getItem(selectedTaskIdKey));
 
 // Utility Functions
+function showError(input) {
+  const parent = input.parentElement;
+  const small = parent.querySelector('small');
+  small.innerText = `${input.id.charAt(0).toUpperCase() + input.id.slice(1)} is required`;
+}
+
 const renderProjects = () => {
   projects.forEach((project) => {
     const projectItem = document.createElement('li');
@@ -58,7 +64,6 @@ const renderTasks = (selectedProject) => {
     checkBox.id = task.id;
     checkBox.checked = task.completed;
     const taskLabel = taskElement.querySelector('.todos__label');
-    taskLabel.htmlFor = task.id;
     taskLabel.innerHTML = `${task.name}  &nbsp; - &nbsp;  due on ${task.dueDate}`;
     taskLabel.style.fontWeight = 'bold';
     if (task.priority === 1) {
@@ -147,10 +152,29 @@ projectDeleteButton.addEventListener('click', () => {
 taskForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const taskName = taskTitleElement.value;
+  if (taskName === null || taskName === '') {
+    showError(taskTitleElement);
+    return;
+  }
+
   const taskDescription = taskDescriptionElement.value;
+  if (taskDescription === null || taskDescription === '') {
+    showError(taskDescriptionElement);
+    return;
+  }
+
   const taskDueDate = taskDueDateElement.value;
+  if (taskDueDate === null || taskDueDate === '') {
+    showError(taskDueDateElement);
+    return;
+  }
+
   const taskPriority = parseInt(taskPriorityElement.value, 10);
-  checkEmptyInput(taskName, taskDescription, taskDueDate, taskPriority);
+  if (taskPriority === null || taskPriority === '') {
+    showError(taskPriorityElement);
+    return;
+  }
+
   const newTask = Task(taskName, taskDescription, taskDueDate, taskPriority);
   taskTitleElement.value = null;
   taskDescriptionElement.value = null;
@@ -160,9 +184,12 @@ taskForm.addEventListener('submit', (e) => {
   selectedProject.tasks.push(newTask);
   sortTasks(selectedProject.tasks);
   saveRender();
-  displayElement(projectTasks);
-  displayElement(newTaskButton);
+
   taskCreatorElement.classList.add('hide');
+  displayElement(newTaskButton);
+  displayElement(editTaskFormElement);
+  displayElement(taskForm);
+  displayElement(projectTasks);
 });
 
 editTaskFormElement.addEventListener('submit', (e) => {
@@ -173,16 +200,18 @@ editTaskFormElement.addEventListener('submit', (e) => {
   const taskDescription = taskEditDescriptionElement.value;
   const taskDueDate = taskEditDueDateElement.value;
   const taskPriority = parseInt(taskEditPriorityElement.value, 10);
-  checkEmptyInput(taskName, taskDescription, taskDueDate, taskPriority);
   selectedTask.name = taskName;
   selectedTask.description = taskDescription;
   selectedTask.dueDate = taskDueDate;
   selectedTask.priority = taskPriority;
   sortTasks(selectedProject.tasks);
   saveRender();
+
+  displayElement(editTaskFormElement);
+  displayElement(taskForm);
+  taskCreatorElement.classList.add('hide');
   displayElement(projectTasks);
   displayElement(newTaskButton);
-  taskCreatorElement.classList.add('hide');
 });
 
 projectTasks.addEventListener('click', (e) => {
@@ -195,7 +224,7 @@ projectTasks.addEventListener('click', (e) => {
     renderPendingTasksCount(selectedProject);
   } else if (e.target.dataset.id === 'deleteSelectedTask') {
     const activeCheckBox = e.target.parentNode.firstChild.firstChild;
-    selectedProject.tasks = selectedProject.tasks.filter((task) => !(task.id === activeCheckBox.id));
+    selectedProject.tasks = selectedProject.tasks.filter((tsk) => !(tsk.id === activeCheckBox.id));
     saveRender();
   } else if (e.target.tagName === 'LABEL') {
     const taskDetails = e.target.parentNode.parentNode.parentNode.lastChild;
@@ -204,8 +233,8 @@ projectTasks.addEventListener('click', (e) => {
   } else if (e.target.dataset.code === e.target.parentNode.firstChild.firstChild.id) {
     const taskToEditId = e.target.dataset.code;
     taskCreatorElement.classList.remove('hide');
-    removeDisplay(taskForm);
     displayElement(editTaskFormElement);
+    removeDisplay(taskForm);
     removeDisplay(projectTasks);
     removeDisplay(newTaskButton);
     const activeTask = selectedProject.tasks.find((task) => task.id === taskToEditId);
@@ -217,6 +246,7 @@ projectTasks.addEventListener('click', (e) => {
 });
 
 newTaskButton.addEventListener('click', () => {
+  displayElement(taskForm);
   taskCreatorElement.classList.remove('hide');
   removeDisplay(editTaskFormElement);
   removeDisplay(projectTasks);
@@ -225,6 +255,8 @@ newTaskButton.addEventListener('click', () => {
 
 taskCreatorElement.addEventListener('click', (e) => {
   if (e.target.id === 'close') {
+    displayElement(taskForm);
+    displayElement(editTaskFormElement);
     taskCreatorElement.classList.add('hide');
     displayElement(projectTasks);
     displayElement(newTaskButton);

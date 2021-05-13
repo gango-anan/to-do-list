@@ -265,7 +265,6 @@ h3 {
         width: 100%;
         padding: 0.5rem;
         font-size: 1rem;
-        margin-bottom: 1rem;
 
         &:focus {
           outline: 0;
@@ -279,7 +278,7 @@ h3 {
 
       label {
         display: block;
-        margin-bottom: 0.5rem;
+        margin: 1rem 0 0.5rem 0;
       }
     }
 
@@ -311,6 +310,10 @@ h3 {
     position: absolute;
     left: 35%;
     bottom: -25px;
+  }
+
+  & small {
+    color: red;
   }
 }
 
