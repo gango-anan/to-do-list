@@ -1,5 +1,6 @@
-import Project from './project';
-import { Task, sortTasks, checkEmptyInput } from './task';
+import { Project } from './project';
+import { Task, sortTasks } from './task';
+import { checkEmptyInput, removeElements, displayElement, removeDisplay } from './utilities';
 import '@fortawesome/fontawesome-free/js/all';
 
 const projectsContainer = document.querySelector('.projects__list');
@@ -28,26 +29,13 @@ const taskEditPriorityElement = document.getElementById('priority2');
 const projectsKey = 'myProjects';
 const selectedProjectIdKey = 'mySelectedProjectId';
 const selectedTaskIdKey = 'mySelectedTaskId';
+
 let projects = JSON.parse(localStorage.getItem(projectsKey)) || [{ id: Date.now().toString(), name: 'General', tasks: [] }];
 
 let selectedProjectId = JSON.parse(localStorage.getItem(selectedProjectIdKey));
 let selectedTaskId = JSON.parse(localStorage.getItem(selectedTaskIdKey));
 
 // Utility Functions
-const removeElements = (parentElement) => {
-  while (parentElement.lastChild) {
-    parentElement.removeChild(parentElement.lastChild);
-  }
-};
-
-const displayElement = (element) => {
-  element.style.display = '';
-};
-
-const removeDisplay = (element) => {
-  element.style.display = 'none';
-};
-
 const renderProjects = () => {
   projects.forEach((project) => {
     const projectItem = document.createElement('li');
@@ -194,17 +182,17 @@ editTaskFormElement.addEventListener('submit', (e) => {
 });
 
 projectTasks.addEventListener('click', (e) => {
-  const activeProject = projects.find((project) => project.id === selectedProjectId);
+  const selectedProject = projects.find((project) => project.id === selectedProjectId);
 
   if (e.target.tagName === 'INPUT') {
-    const selectedTask = activeProject.tasks.find((task) => task.id === e.target.id);
+    const selectedTask = selectedProject.tasks.find((task) => task.id === e.target.id);
     selectedTaskId = selectedTask.id;
     selectedTask.completed = e.target.checked;
     save();
-    renderPendingTasksCount(activeProject);
+    renderPendingTasksCount(selectedProject);
   } else if (e.target.dataset.id === 'deleteSelectedTask') {
     const activeCheckBox = e.target.parentNode.firstChild.firstChild;
-    activeProject.tasks = activeProject.tasks.filter((task) => !(task.id === activeCheckBox.id));
+    selectedProject.tasks = selectedProject.tasks.filter((task) => !(task.id === activeCheckBox.id));
     saveRender();
   } else if (e.target.tagName === 'LABEL') {
     const taskDetails = e.target.parentNode.parentNode.parentNode.lastChild;
@@ -216,7 +204,7 @@ projectTasks.addEventListener('click', (e) => {
     displayElement(editTaskFormElement);
     removeDisplay(projectTasks);
     removeDisplay(newTaskButton);
-    const activeTask = activeProject.tasks.find((task) => task.id === selectedTaskId);
+    const activeTask = selectedProject.tasks.find((task) => task.id === selectedTaskId);
     taskEditTitleElement.value = `${activeTask.name}`;
     taskEditDescriptionElement.value = `${activeTask.description}`;
     taskEditPriorityElement.value = activeTask.priority;

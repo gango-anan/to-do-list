@@ -17,11 +17,4 @@ const sortTasks = (taskList) => {
   });
 };
 
-const checkEmptyInput = (entryOne, entryTwo, entryThree, entryFour) => {
-  if (entryOne === null || entryOne === '') return;
-  if (entryTwo === null || entryTwo === '') return;
-  if (entryThree === null || entryThree === '') return;
-  if (entryFour === null || entryFour === '') return;
-};
-
-export { Task, sortTasks, checkEmptyInput };
+export { Task, sortTasks };
