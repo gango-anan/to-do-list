@@ -38,11 +38,11 @@ let selectedProjectId = JSON.parse(localStorage.getItem(selectedProjectIdKey));
 let selectedTaskId = JSON.parse(localStorage.getItem(selectedTaskIdKey));
 
 // Utility Functions
-function showError(input) {
+const showError = (input) => {
   const parent = input.parentElement;
   const small = parent.querySelector('small');
   small.innerText = `${input.id.charAt(0).toUpperCase() + input.id.slice(1)} is required`;
-}
+};
 
 const renderProjects = () => {
   projects.forEach((project) => {
@@ -232,6 +232,8 @@ projectTasks.addEventListener('click', (e) => {
     displayElement(taskDetails);
   } else if (e.target.dataset.code === e.target.parentNode.firstChild.firstChild.id) {
     const taskToEditId = e.target.dataset.code;
+    selectedTaskId = taskToEditId;
+    save();
     taskCreatorElement.classList.remove('hide');
     displayElement(editTaskFormElement);
     removeDisplay(taskForm);
