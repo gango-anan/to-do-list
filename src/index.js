@@ -1,6 +1,8 @@
-import { Project } from './project';
+import Project from './project';
 import { Task, sortTasks } from './task';
-import { checkEmptyInput, removeElements, displayElement, removeDisplay } from './utilities';
+import {
+  checkEmptyInput, removeElements, displayElement, removeDisplay,
+} from './utilities';
 import '@fortawesome/fontawesome-free/js/all';
 
 const projectsContainer = document.querySelector('.projects__list');

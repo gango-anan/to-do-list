@@ -19,4 +19,6 @@ const removeDisplay = (element) => {
   element.style.display = 'none';
 };
 
-export { checkEmptyInput, removeElements, displayElement, removeDisplay  };
+export {
+  checkEmptyInput, removeElements, displayElement, removeDisplay,
+};
