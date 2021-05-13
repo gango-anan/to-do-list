@@ -68,9 +68,11 @@ const renderTasks = (selectedProject) => {
     } else {
       taskLabel.style.color = '#61f30d';
     }
-    const descriptP = taskElement.getElementById('descrip');
+    const editButton = taskElement.querySelector('.todos__edit');
+    editButton.setAttribute('data-code', `${task.id}`);
+    const descriptP = taskElement.querySelector('.descrip');
     descriptP.innerText = task.description;
-    const priorityP = taskElement.getElementById('prio');
+    const priorityP = taskElement.querySelector('.prio');
     if (task.priority === 1) {
       priorityP.innerText = 'Priority : High';
     } else if (task.priority === 2) {
@@ -185,7 +187,6 @@ editTaskFormElement.addEventListener('submit', (e) => {
 
 projectTasks.addEventListener('click', (e) => {
   const selectedProject = projects.find((project) => project.id === selectedProjectId);
-
   if (e.target.tagName === 'INPUT') {
     const selectedTask = selectedProject.tasks.find((task) => task.id === e.target.id);
     selectedTaskId = selectedTask.id;
@@ -200,13 +201,14 @@ projectTasks.addEventListener('click', (e) => {
     const taskDetails = e.target.parentNode.parentNode.parentNode.lastChild;
     e.target.style.fontSize = '1.4rem';
     displayElement(taskDetails);
-  } else if (e.target.id === 'edit') {
+  } else if (e.target.dataset.code === e.target.parentNode.firstChild.firstChild.id) {
+    const taskToEditId = e.target.dataset.code;
     taskCreatorElement.classList.remove('hide');
     removeDisplay(taskForm);
     displayElement(editTaskFormElement);
     removeDisplay(projectTasks);
     removeDisplay(newTaskButton);
-    const activeTask = selectedProject.tasks.find((task) => task.id === selectedTaskId);
+    const activeTask = selectedProject.tasks.find((task) => task.id === taskToEditId);
     taskEditTitleElement.value = `${activeTask.name}`;
     taskEditDescriptionElement.value = `${activeTask.description}`;
     taskEditPriorityElement.value = activeTask.priority;
