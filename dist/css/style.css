@@ -196,7 +196,14 @@ h3 {
 }
 
 .todos__container {
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid #ece9e9;
+  padding: 1rem;
+}
+
+.todos__container:hover {
+  -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .todos__task-details {

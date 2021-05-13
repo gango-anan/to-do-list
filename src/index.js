@@ -228,7 +228,6 @@ projectTasks.addEventListener('click', (e) => {
     saveRender();
   } else if (e.target.tagName === 'LABEL') {
     const taskDetails = e.target.parentNode.parentNode.parentNode.lastChild;
-    e.target.style.fontSize = '1.4rem';
     displayElement(taskDetails);
   } else if (e.target.dataset.code === e.target.parentNode.firstChild.firstChild.id) {
     const taskToEditId = e.target.dataset.code;
