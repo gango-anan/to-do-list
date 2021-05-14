@@ -87,7 +87,7 @@ const renderTasks = (selectedProject) => {
       priorityP.innerText = 'Priority : Low';
     }
     const taskDue = taskElement.querySelector('.task-due-date');
-    taskDue.innerText = `due date ${ task.dueDate }`;
+    taskDue.innerText = `due date ${task.dueDate}`;
     const taskDetails = taskElement.querySelector('.todos__task-details');
     removeDisplay(taskDetails);
     projectTasks.appendChild(taskElement);
