@@ -4,10 +4,101 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ToDo List</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>To Do List</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script defer src="main.js"></script>
 </head>
 <body>
-  <script src="main.js"></script>
+  <h1 class="app-title">TO DO LIST APP</h1>
+  <div class="projects">
+    <div class="projects__title">
+      <h2>Projects</h2>
+    </div>
+    <div class="projects__body">
+      <ul class="projects__list"></ul>
+      <form action="" class="projects__form">
+        <input type="text" class="projects__form__input"
+        placeholder="new project"
+        aria-label="new project"/>
+        <button class="projects__form__button">+ New Project</button>
+      </form>
+      <button class="projects__delete_button">Delete Project</button>
+    </div>
+  </div>
+
+  <div class="todos">
+    <div class="todos__header">
+      <h2 class="todos__title"></h2>
+      <p class="todos__count"></p>
+    </div>
+    <div class="todos__body">
+      <div class="todos__all-tasks"></div>
+      <div class="todos__creator hide">
+        <button type="button" class="todos__close">
+          <span id="close">&times;</span>
+        </button>
+        <form action="" class="todos__form" id="todos-form">
+          <h3>Create New Task</h3>
+          <div class="todos__form__inputs">
+            <label for="title">Title:</label>
+            <input type="text" class="todos__input" id="title" placeholder="new task" aria-label="new task"/>
+            <small></small>
+          </div>
+          <div class="todos__form__inputs">
+            <label for="description">Description:</label>
+            <input type="text" class="todos__description" id="description" placeholder="Description" aria-label="new task"/>
+            <small></small>
+          </div>
+          <div class="todos__form__inputs">
+            <label for="due-date">Due date:</label>
+            <input type="date" class="todos__due-date" id="due-date" placeholder="Date" aria-label="new task"/>
+            <small></small>
+          </div>
+          <div class="todos__form__inputs">
+            <label for="priority">Priority:</label>
+            <select name="pets" id="priority" form ="todos-form">
+              <option value="">--Please select the priority--</option>
+              <option value="1">High</option>
+              <option value="2">Medium</option>
+              <option value="3">Low</option>
+            </select>
+            <small></small>
+          </div>
+          <button class="todos__form__btn">Create task</button>
+        </form>
+        <form action="" class="todos__form todos-edit-form" id="todos-edit-form">
+          <h3>Edit Task</h3>
+          <div class="todos__form__inputs">
+            <label for="title2">Title:</label>
+            <input type="text" class="todos__input" id="title2" placeholder="Edit title" aria-label="Edit title"/>
+          </div>
+          <div class="todos__form__inputs">
+            <label for="description2">Edit description:</label>
+            <input type="text" class="todos__description" id="description2" placeholder="Description" aria-label="new task"/>
+          </div>
+          <div class="todos__form__inputs">
+            <label for="due-date2">Edit due date:</label>
+            <input type="date" class="todos__due-date" id="due-date2" placeholder="Due date" aria-label="Due date"/>
+          </div>
+          <div class="todos__form__inputs">
+            <label for="priority2">Priority:</label>
+            <select name="pets" id="priority2" form ="todos-form"><option value="" id="default"></option>
+              <option value="1">High</option>
+              <option value="2">Medium</option>
+              <option value="3">Low</option>
+          </select>
+          </div>
+          <button class="todos__form__btn">Edit task</button>
+        </form>
+      </div>
+      <button class="todos__new-task-button">+ New task</button>
+    </div>
+  </div>
+
+  <template id="task-template">
+    <div class="todos__container"><div class="todos__tasks"><div class="todos__task"><input type="checkbox" class="todos__item"/><label class="todos__label"></label></div><span class="task-due-date"></span><i class="todos__edit">Edit</i><i class="todos__delete far fa-trash-alt" id="del" data-id="deleteSelectedTask"></i></div><div class="todos__task-details">
+        <p class="descrip"></p>
+        <p class="prio"></p></div></div>
+  </template>
 </body>
 </html>
