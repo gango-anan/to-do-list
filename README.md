@@ -40,6 +40,8 @@ $ npm install
 Run the application by launching your local webserver and lauching the index.html file in the browser
 http://127.0.0.1:5500/dist/index.html
 
+```
+
 
 
 ## Authors
@@ -74,4 +76,4 @@ Give a ⭐️ if you like this project!
 
 ## 📝 License
 
-This project is [MIT](https://github.com/gango-anan/to-do-list/blob/todo-features/LICENSE) licensed.
+This project is [MIT](https://github.com/gango-anan/to-do-list/blob/development/LICENSE) licensed.
