@@ -64,7 +64,8 @@ const renderTasks = (selectedProject) => {
     checkBox.id = task.id;
     checkBox.checked = task.completed;
     const taskLabel = taskElement.querySelector('.todos__label');
-    taskLabel.innerHTML = `${task.name}  &nbsp; - &nbsp;  due on ${task.dueDate}`;
+    taskLabel.innerHTML = task.name;
+    // taskLabel.innerHTML = `${task.name}  &nbsp; - &nbsp;  due on ${task.dueDate}`;
     taskLabel.style.fontWeight = 'bold';
     if (task.priority === 1) {
       taskLabel.style.color = '#ff0000';
@@ -85,6 +86,8 @@ const renderTasks = (selectedProject) => {
     } else {
       priorityP.innerText = 'Priority : Low';
     }
+    const taskDue = taskElement.querySelector('.task-due-date');
+    taskDue.innerText = `due date ${ task.dueDate }`;
     const taskDetails = taskElement.querySelector('.todos__task-details');
     removeDisplay(taskDetails);
     projectTasks.appendChild(taskElement);
