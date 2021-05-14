@@ -3,7 +3,7 @@
 > TODO LIST is a web application build with JavaScript, CSS and HTML. It stores the data locally in the browser with help of the inbuilt JavaScript localStorage API. This application helps a user organize his/her Todo tasks into projects with specific deadlines for each project. A user can specify the urgency of the application so it can be given priority. 
 
 ## TODO LIST Snapshot.
-![Home page](./dist/images/Todo_snapshot.png)
+![Home page](./dist/images/project-snapshot.png)
 
 ## Built With
 
