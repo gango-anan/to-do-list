@@ -4,14 +4,4 @@ const removeElements = (parent) => {
   }
 };
 
-const displayElement = (element) => {
-  element.style.display = '';
-};
-
-const removeDisplay = (element) => {
-  element.style.display = 'none';
-};
-
-export {
-  removeElements, displayElement, removeDisplay,
-};
+export { removeElements as default };
