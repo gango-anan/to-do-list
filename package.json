@@ -4,7 +4,7 @@
   "description": "To-do-list ",
   "main": "index.js",
   "scripts": {
-    "test": "jest --detectOpenHandles",
+    "test": "jest",
     "dev": "webpack --mode=development",
     "watch": "webpack --mode=development --watch",
     "build": "webpack --mode=production"
