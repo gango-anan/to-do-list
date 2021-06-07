@@ -1,8 +1,9 @@
 import { Task, sortTasks } from './task';
-import removeElements from './utilities';
+/// import removeElements from './utilities';
 import '@fortawesome/fontawesome-free/js/all';
 
 const { Project } = require('./project');
+const { removeElements } = require('./utilities');
 
 const projectsContainer = document.querySelector('.projects__list');
 const projectForm = document.querySelector('.projects__form');
