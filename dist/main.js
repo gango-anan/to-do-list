@@ -56,7 +56,7 @@ eval("exports.Task = (name, description, dueDate, priority) => ({\n  id: `task-$
   \**************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-eval("exports.removeElements = (parent) => {\n  while (parent.lastChild) {\n    parent.removeChild(parent.lastChild);\n  }\n};\n\n// export { removeElements as default };\n\n// const removeElements = (parent) => {\n//   while (parent.lastChild) {\n//     parent.removeChild(parent.lastChild);\n//   }\n// };\n\n// export { removeElements as default };\n\n//# sourceURL=webpack://todo-list/./src/utilities.js?");
+eval("exports.removeElements = (parent) => {\n  while (parent.lastChild) {\n    parent.removeChild(parent.lastChild);\n  }\n};\n\n\n//# sourceURL=webpack://todo-list/./src/utilities.js?");
 
 /***/ })
 
