@@ -1,5 +1,4 @@
 import { Task, sortTasks } from './task';
-/// import removeElements from './utilities';
 import '@fortawesome/fontawesome-free/js/all';
 
 const { Project } = require('./project');

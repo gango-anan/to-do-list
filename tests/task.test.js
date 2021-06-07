@@ -30,10 +30,8 @@ test('it should sort tasks based on priority', () => {
     },
   ];
 
-  // Before sorting
   expect(tasks).not.toEqual(sortedTasks);
 
-  // After sorting
   sortTasks(tasks);
   expect(tasks).toEqual(sortedTasks);
 });
