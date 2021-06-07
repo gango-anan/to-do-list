@@ -139,8 +139,6 @@ projectsContainer.addEventListener('click', (e) => {
     selectedProjectId = e.target.id;
     projectTasks.classList.remove('hide');
     newTaskButton.classList.remove('hide');
-    // displayElement(projectTasks);
-    // displayElement(newTaskButton);
     taskCreatorElement.classList.add('hide');
     saveRender();
   }
@@ -210,13 +208,8 @@ editTaskFormElement.addEventListener('submit', (e) => {
   saveRender();
 
   editTaskFormElement.classList.remove('hide');
-  // displayElement(editTaskFormElement);
-  // displayElement(taskForm);
   taskForm.classList.remove('hide');
   taskCreatorElement.classList.add('hide');
-
-  // displayElement(projectTasks);
-  // displayElement(newTaskButton);
   projectTasks.classList.remove('hide');
   newTaskButton.classList.remove('hide');
 });
