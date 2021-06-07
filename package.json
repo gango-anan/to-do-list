@@ -4,7 +4,7 @@
   "description": "To-do-list ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --env=jsdom",
     "dev": "webpack --mode=development",
     "watch": "webpack --mode=development --watch",
     "build": "webpack --mode=production"
@@ -16,6 +16,7 @@
     "eslint": "^7.26.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
+    "jest": "^27.0.1",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^21.0.0",
     "stylelint-csstree-validator": "^1.9.0",

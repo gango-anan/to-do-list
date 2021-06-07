@@ -1,8 +1,8 @@
-const Task = (name, description, dueDate, priority) => ({
+exports.Task = (name, description, dueDate, priority) => ({
   id: `task-${Date.now().toString()}`, name, description, dueDate, priority, completed: false,
 });
 
-const sortTasks = (taskList) => {
+exports.sortTasks = (taskList) => {
   taskList.sort((a, b) => {
     const priorityA = a.priority;
     const priorityB = b.priority;
@@ -16,5 +16,3 @@ const sortTasks = (taskList) => {
     return 0;
   });
 };
-
-export { Task, sortTasks };

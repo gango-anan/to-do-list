@@ -1,9 +1,8 @@
-import Project from './project';
 import { Task, sortTasks } from './task';
-import {
-  removeElements, displayElement, removeDisplay,
-} from './utilities';
 import '@fortawesome/fontawesome-free/js/all';
+
+const { Project } = require('./project');
+const { removeElements } = require('./utilities');
 
 const projectsContainer = document.querySelector('.projects__list');
 const projectForm = document.querySelector('.projects__form');
@@ -65,7 +64,6 @@ const renderTasks = (selectedProject) => {
     checkBox.checked = task.completed;
     const taskLabel = taskElement.querySelector('.todos__label');
     taskLabel.innerHTML = task.name;
-    // taskLabel.innerHTML = `${task.name}  &nbsp; - &nbsp;  due on ${task.dueDate}`;
     taskLabel.style.fontWeight = 'bold';
     if (task.priority === 1) {
       taskLabel.style.color = '#ff0000';
@@ -89,7 +87,7 @@ const renderTasks = (selectedProject) => {
     const taskDue = taskElement.querySelector('.task-due-date');
     taskDue.innerText = `due date ${task.dueDate}`;
     const taskDetails = taskElement.querySelector('.todos__task-details');
-    removeDisplay(taskDetails);
+    taskDetails.classList.add('hide');
     projectTasks.appendChild(taskElement);
   });
 };
@@ -104,9 +102,9 @@ const renderProjectsAndTasks = () => {
   removeElements(projectsContainer);
   renderProjects();
   if (selectedProjectId === null) {
-    removeDisplay(tasksContainer);
+    tasksContainer.classList.add('hide');
   } else {
-    displayElement(tasksContainer);
+    tasksContainer.classList.remove('hide');
     const selectedProject = projects.find((project) => project.id === selectedProjectId);
     projectTitle.innerText = selectedProject.name;
     renderPendingTasksCount(selectedProject);
@@ -139,8 +137,8 @@ projectForm.addEventListener('submit', (e) => {
 projectsContainer.addEventListener('click', (e) => {
   if (e.target.tagName === 'LI') {
     selectedProjectId = e.target.id;
-    displayElement(projectTasks);
-    displayElement(newTaskButton);
+    projectTasks.classList.remove('hide');
+    newTaskButton.classList.remove('hide');
     taskCreatorElement.classList.add('hide');
     saveRender();
   }
@@ -187,12 +185,11 @@ taskForm.addEventListener('submit', (e) => {
   selectedProject.tasks.push(newTask);
   sortTasks(selectedProject.tasks);
   saveRender();
-
   taskCreatorElement.classList.add('hide');
-  displayElement(newTaskButton);
-  displayElement(editTaskFormElement);
-  displayElement(taskForm);
-  displayElement(projectTasks);
+  newTaskButton.classList.remove('hide');
+  editTaskFormElement.classList.remove('hide');
+  taskForm.classList.remove('hide');
+  projectTasks.classList.remove('hide');
 });
 
 editTaskFormElement.addEventListener('submit', (e) => {
@@ -210,11 +207,11 @@ editTaskFormElement.addEventListener('submit', (e) => {
   sortTasks(selectedProject.tasks);
   saveRender();
 
-  displayElement(editTaskFormElement);
-  displayElement(taskForm);
+  editTaskFormElement.classList.remove('hide');
+  taskForm.classList.remove('hide');
   taskCreatorElement.classList.add('hide');
-  displayElement(projectTasks);
-  displayElement(newTaskButton);
+  projectTasks.classList.remove('hide');
+  newTaskButton.classList.remove('hide');
 });
 
 projectTasks.addEventListener('click', (e) => {
@@ -231,16 +228,16 @@ projectTasks.addEventListener('click', (e) => {
     saveRender();
   } else if (e.target.tagName === 'LABEL') {
     const taskDetails = e.target.parentNode.parentNode.parentNode.lastChild;
-    displayElement(taskDetails);
+    taskDetails.classList.remove('hide');
   } else if (e.target.dataset.code === e.target.parentNode.firstChild.firstChild.id) {
     const taskToEditId = e.target.dataset.code;
     selectedTaskId = taskToEditId;
     save();
     taskCreatorElement.classList.remove('hide');
-    displayElement(editTaskFormElement);
-    removeDisplay(taskForm);
-    removeDisplay(projectTasks);
-    removeDisplay(newTaskButton);
+    editTaskFormElement.classList.remove('hide');
+    taskForm.classList.add('hide');
+    projectTasks.classList.add('hide');
+    newTaskButton.classList.add('hide');
     const activeTask = selectedProject.tasks.find((task) => task.id === taskToEditId);
     taskEditTitleElement.value = `${activeTask.name}`;
     taskEditDescriptionElement.value = `${activeTask.description}`;
@@ -250,20 +247,20 @@ projectTasks.addEventListener('click', (e) => {
 });
 
 newTaskButton.addEventListener('click', () => {
-  displayElement(taskForm);
+  taskForm.classList.remove('hide');
   taskCreatorElement.classList.remove('hide');
-  removeDisplay(editTaskFormElement);
-  removeDisplay(projectTasks);
-  removeDisplay(newTaskButton);
+  editTaskFormElement.classList.add('hide');
+  projectTasks.classList.add('hide');
+  newTaskButton.classList.add('hide');
 });
 
 taskCreatorElement.addEventListener('click', (e) => {
   if (e.target.id === 'close') {
-    displayElement(taskForm);
-    displayElement(editTaskFormElement);
+    taskForm.classList.remove('hide');
+    editTaskFormElement.remove('hide');
     taskCreatorElement.classList.add('hide');
-    displayElement(projectTasks);
-    displayElement(newTaskButton);
+    projectTasks.classList.remove('hide');
+    newTaskButton.classList.remove('hide');
   }
 });
 renderProjectsAndTasks();
